@@ -12,6 +12,9 @@ sensor:
       id: co2
       filters:
         - skip_initial: 1  # Sometimes returns 0 at first boot instead of valid data
+        - sliding_window_moving_average:
+            window_size: 5
+            send_every: 1
         - offset: $co2_offset
     id: senseair_s8
     uart_id: senseair_s8_uart

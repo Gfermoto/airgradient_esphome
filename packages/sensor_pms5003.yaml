@@ -13,6 +13,9 @@ sensor:
       id: pm_2_5
       device_class: pm25  # Added to report properly to HomeKit
       filters:
+        - sliding_window_moving_average:
+            window_size: 5
+            send_every: 1
         - lambda: |-
             float result = 0.0;
             if (x == 0.0) {
@@ -37,14 +40,25 @@ sensor:
       name: "PM 1.0"
       id: pm_1_0
       device_class: pm1  # Added to report properly to HomeKit
+      filters:
+        - sliding_window_moving_average:
+            window_size: 5
+            send_every: 1
     pm_10_0:
       name: "PM 10.0"
       id: pm_10_0
       device_class: pm10  # Added to report properly to HomeKit
+      filters:
+        - sliding_window_moving_average:
+            window_size: 5
+            send_every: 1
     pm_0_3um:
       name: "PM 0.3"
       id: pm_0_3um
       filters:
+        - sliding_window_moving_average:
+            window_size: 5
+            send_every: 1
     update_interval: 30s
 
 
@@ -58,6 +72,9 @@ sensor:
     accuracy_decimals: 0
     filters:
       - skip_initial: 1  # Need valid data from PM 2.5 sensor before able to calculate
+      - sliding_window_moving_average:
+          window_size: 5
+          send_every: 1
     lambda: |-
       // 2024 update from EPA https://www.epa.gov/system/files/documents/2024-02/pm-naaqs-air-quality-index-fact-sheet.pdf
       // https://en.wikipedia.org/wiki/Air_quality_index#Computing_the_AQI

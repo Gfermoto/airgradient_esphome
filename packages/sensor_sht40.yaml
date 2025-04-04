@@ -5,16 +5,28 @@ sensor:
       name: "Temperature Raw"
       id: temp_raw
       disabled_by_default: true
+      filters:
+        - sliding_window_moving_average:
+            window_size: 5
+            send_every: 1
     humidity:
       name: "Humidity Raw"
       id: humidity_raw
       disabled_by_default: true
+      filters:
+        - sliding_window_moving_average:
+            window_size: 5
+            send_every: 1
     address: 0x44
 
   - platform: copy
     source_id: temp_raw
     name: "Temperature"
     id: temp
+    filters:
+      - sliding_window_moving_average:
+          window_size: 5
+          send_every: 1
     # https://www.airgradient.com/documentation/correction-algorithms/
     # No current correction for indoor devices, but structure in place if developed
 
@@ -22,5 +34,9 @@ sensor:
     source_id: humidity_raw
     name: "Humidity"
     id: humidity
+    filters:
+      - sliding_window_moving_average:
+          window_size: 5
+          send_every: 1
     # https://www.airgradient.com/documentation/correction-algorithms/
     # No current correction for indoor devices, but structure in place if developed
