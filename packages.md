@@ -34,7 +34,7 @@
 
 ## button_factory_reset.yaml
 
-Включает кнопку для сброса устройства к заводским настройкам, что стирает всю nvram и все сохраненные настройки.
+Включает кнопку для сброса устройства к заводским настройкам, что стирает всю энергонезависимую память и все сохраненные настройки.
 
 Полезно, если появляются предупреждающие сообщения о невозможности сохранения настроек
 
@@ -76,7 +76,7 @@ binary_sensor:
 * Страницы сводки с большим шрифтом
 * Качество воздуха только со значениями CO2 и PM2.5
 * Температура и влажность воздуха
-* Значения VOC и NOx
+* Значения летучих органических соединений и оксидов азота
 * Комбинированная страница с несколькими значениями датчиков
 
 ## display_sh1106_single_page.yaml
@@ -105,7 +105,7 @@ substitutions:
 
 ## led_combo.yaml
 
-Светодиодная полоса в AG ONE, отражающая значения нескольких датчиков. Левые 5 светодиодов отражают уровни CO2, средние 5 светодиодов отражают уровни PM2.5, крайний правый указывает на TVOC. (То же, что и дисплей)
+Светодиодная полоса в AG ONE, отражающая значения нескольких датчиков. Левые 5 светодиодов отражают уровни CO2, средние 5 светодиодов отражают уровни PM2.5, крайний правый указывает на летучие органические соединения. (То же, что и дисплей)
 
 Смешивает цвета от зеленого>желтого>оранжевого>красного>фиолетового на основе чисел, предоставленных AirGradient. Значения для каждого цвета можно изменить, добавив раздел подстановок в вашу конфигурацию.
 
@@ -144,7 +144,7 @@ substitutions:
 
 ## led_tvoc.yaml
 
-Светодиодная полоса в AG ONE отражает уровни VOC.
+Светодиодная полоса в AG ONE отражает уровни летучих органических соединений.
 
 Смешивает цвета от синего>зеленого>фиолетового на основе чисел, предоставленных AirGradient. Значения для каждого цвета можно изменить, добавив раздел подстановок в вашу конфигурацию.
 
@@ -165,15 +165,15 @@ substitutions:
 
 ## sensor_nowcast_aqi.yaml
 
-Настраивает датчики для значений AQI и NowCast и категории непосредственно на устройстве.
+Настраивает датчики для значений индекса качества воздуха и прогноза NowCast и категории непосредственно на устройстве.
 
 Предоставлено пользователем GitHub @Ex-Nerd
 
 ## sensor_bme680.yaml
 
-Настраивает датчики из чипа BME 680 для предоставления температуры, влажности, давления, IAQ, эквивалента CO2 и дыхательного VOC.
+Настраивает датчики из чипа BME 680 для предоставления температуры, влажности, давления, индекса качества воздуха, эквивалента CO2 и дыхательных летучих органических соединений.
 
-Не является надежным источником CO2 или VOC.
+Не является надежным источником CO2 или летучих органических соединений.
 
 ## sensor_pms5003_extended_life.yaml
 
@@ -199,7 +199,7 @@ substitutions:
 
 ## sensor_pms5003t_2.yaml
 
-Настраивает второй датчик Plantower PMS5003T, когда установлено 2, например, в модели Open Air O-1PPT. Отчитывается о PM 2.5, температуре и влажности.
+Настраивает второй датчик Plantower PMS5003T, когда установлено 2, например, в модели Open Air O-1PPT. Отчитывается о PM2.5, температуре и влажности.
 
 Также применяет алгоритм компенсации от AirGradient для коррекции показаний температуры и влажности при использовании внутри корпуса Open Air
 
@@ -207,7 +207,7 @@ substitutions:
 
 ## sensor_pms5003t_extended_life.yaml
 
-Настраивает датчик Plantower PMS5003T. Отчитывается о PM 2.5, температуре и влажности.
+Настраивает датчик Plantower PMS5003T. Отчитывается о PM2.5, температуре и влажности.
 
 Также применяет алгоритм компенсации от AirGradient для коррекции показаний температуры и влажности при использовании внутри корпуса Open Air
 
@@ -218,13 +218,13 @@ substitutions:
 
 ## sensor_pms5003t_uncorrected.yaml
 
-Настраивает датчик Plantower PMS5003T. Отчитывается о PM 2.5, температуре и влажности.
+Настраивает датчик Plantower PMS5003T. Отчитывается о PM2.5, температуре и влажности.
 
 Не применяет алгоритм компенсации для предоставления значений непосредственно с датчика
 
 ## sensor_pms5003t.yaml
 
-Настраивает датчик Plantower PMS5003T. Отчитывается о PM 2.5, температуре и влажности.
+Настраивает датчик Plantower PMS5003T. Отчитывается о PM2.5, температуре и влажности.
 
 Также применяет алгоритм компенсации от AirGradient для коррекции показаний температуры и влажности при использовании внутри корпуса Open Air
 
@@ -232,7 +232,7 @@ substitutions:
 
 Настраивает датчик Plantower PMS5003, используя необработанные значения с датчика
 
-Отчитывается о PM 2.5, PM 10, PM 1.0, PM 0.3 и индексе качества воздуха на основе текущих показаний.
+Отчитывается о PM2.5, PM10, PM1.0, PM0.3 и индексе качества воздуха на основе текущих показаний.
 
 ## sensor_pms5003.yaml
 
@@ -242,70 +242,12 @@ substitutions:
 
 https://www.airgradient.com/documentation/correction-algorithms/
 
-Отчитывается о PM 2.5, PM 10, PM 1.0, PM 0.3 и индексе качества воздуха на основе текущих показаний.
+Отчитывается о PM2.5, PM10, PM1.0, PM0.3 и индексе качества воздуха на основе текущих показаний.
 
 ## sensor_s8.yaml
 
 Настраивает датчик Senseair S8.
 
-Reports CO2 levels and enables buttons to initiate a manual baseline correction, show the correction interval, and disable/enable Automatic Baseline Correction feature
+Отчитывается об уровнях CO2 и включает кнопки для инициирования ручной коррекции базовой линии, отображения интервала коррекции и включения/отключения функции автоматической коррекции базовой линии.
 
-Also supports a substitution to introduce an offset to the CO2 readings.  May be helpful if wanting to calibrate to a number different than 400 ppm, or if the sensor is off by a known number.
-
-To your main YAML file, add the following to the substitution section.  Numbers must be surrounded by single quotes and may be positive or negative.
-
-```yaml
-substitutions:
-  co2_offset: '0'
-```
-
-## sensor_sgp41.yaml
-
-Configures a Sensirion SGP41 sensor.
-
-Reports VOC and NOx Index values.
-
-Now supports modifying VOC and NOx learning time offset hours by adding the substitutions
-
-```yaml
-substitutions:
-  # 12, 60, 120, 360, 720 are suggested values from AirGradient (range 1..1000)
-  voc_learning_time_offset_hours: '12'
-  nox_learning_time_offset_hours: '12'
-```
-
-## sensor_sht30.yaml
-
-Configures a Sensirion SHT30 sensor
-
-Reports temperature and humidity
-
-## sensor_sht40.yaml
-
-Configures a Sensirion SHT40 sensor
-
-Reports temperature and humidity
-
-## sensor_uptime.yaml
-
-Configures an Uptime sensor
-
-Reports how long since the last reboot in seconds
-
-## sensor_wifi.yaml
-
-Configures a WiFi sensor
-
-These values are always negative and the closer they are to zero, the better the signal is.
-
-## switch_safe_mode.yaml
-
-Configures a switch to enable Safe Mode
-
-This is useful in certain situations where a misbehaving component, or low memory state is preventing Over-The-Air updates from completing successfully.
-
-## watchdog.yaml
-
-Configures a hardware watchdog for devices that have one installed, such as AG ONE and Open Air
-
-Sends a notification to the watchdog every 2.5 minutes to indicate it is still alive. If not received after ~5 minutes, device will reset
+Также поддерживает подстановку для введения смещения в показания CO2. Может быть полезно, если требуется откалибровать на число, отличное от 400 ppm, или если датчик отклоняется на известное значение.
