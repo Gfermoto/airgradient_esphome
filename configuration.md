@@ -1,14 +1,134 @@
-# Configuration
+# Конфигурация
 
-If all original sensors (PMS5003, Senseair S8, SHT4x) are connected, configuration files should be ready for use.
+## Общие настройки
 
-If some sensors are not installed, comment or remove the associated sections under `packages:`
+### Wi-Fi
 
-The PMS5003 sensor by default collects readings every second.  Since this device has a limited lifespan, it is possible to extend the life by collecting readings less frequently, although this could impact the accuracy of the readings collected, since there will not be constant airflow through the device when the fan shuts down.  To collect readings every 2 minutes, change the line for the pms5003 sensor to `sensor_pms5003_extended_life.yaml`
+```yaml
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  fast_connect: true
+  power_save_mode: none
+```
 
-> See [PMSX003 Particulate Matter Sensor — ESPHome](https://esphome.io/components/sensor/pmsx003.html#sensor-longevity) for more information
+### API
 
-To add your WiFi SSID and password, add your SSID and password information, per ESPHome specifications
+```yaml
+api:
+  encryption:
+    key: !secret api_encryption_key
+```
+
+### OTA
+
+```yaml
+ota:
+  password: !secret ota_password
+```
+
+### Логирование
+
+```yaml
+logger:
+  level: DEBUG
+  baud_rate: 0
+```
+
+## Настройки датчиков
+
+### PMS5003
+
+```yaml
+sensor:
+  - platform: pmsx003
+    type: PMS5003
+    pm_1_0:
+      name: "PM1.0"
+    pm_2_5:
+      name: "PM2.5"
+    pm_10_0:
+      name: "PM10.0"
+```
+
+### SGP41
+
+```yaml
+sensor:
+  - platform: sgp41
+    tvoc:
+      name: "TVOC"
+    nox:
+      name: "NOx"
+```
+
+### SHT30
+
+```yaml
+sensor:
+  - platform: sht3xd
+    temperature:
+      name: "Temperature"
+    humidity:
+      name: "Humidity"
+```
+
+## Настройки дисплея
+
+### OLED
+
+```yaml
+display:
+  - platform: ssd1306_i2c
+    model: "SSD1306 128x64"
+    address: 0x3C
+    lambda: |-
+      it.print(0, 0, id(font), "AirGradient");
+      it.printf(0, 16, id(font), "PM2.5: %.1f", id(pm25).state);
+      it.printf(0, 32, id(font), "CO2: %.0f", id(co2).state);
+      it.printf(0, 48, id(font), "Temp: %.1fC", id(temperature).state);
+```
+
+## Настройки светодиодов
+
+### LED Bar
+
+```yaml
+light:
+  - platform: neopixelbus
+    type: GRB
+    pin: GPIO2
+    num_leds: 10
+    name: "AirGradient LED Bar"
+    effects:
+      - pulse:
+          name: "Pulse"
+          transition_length: 1s
+          update_interval: 1s
+```
+
+## Настройки кнопок
+
+```yaml
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: GPIO0
+      mode: INPUT_PULLUP
+    name: "Button"
+    on_press:
+      - light.toggle: led_bar
+```
+
+Если все оригинальные датчики (PMS5003, Senseair S8, SHT4x) подключены, файлы конфигурации готовы к использованию.
+
+Если некоторые датчики не установлены, закомментируйте или удалите соответствующие разделы в секции `packages:`
+
+Датчик PMS5003 по умолчанию собирает показания каждую секунду. Поскольку этот датчик имеет ограниченный срок службы, можно продлить его жизнь, собирая показания реже, хотя это может повлиять на точность показаний, так как не будет постоянного потока воздуха через устройство, когда вентилятор выключается. Чтобы собирать показания каждые 2 минуты, измените строку для датчика pms5003 на `sensor_pms5003_extended_life.yaml`
+
+> Подробнее см. [PMSX003 Particulate Matter Sensor — ESPHome](https://esphome.io/components/sensor/pmsx003.html#sensor-longevity)
+
+Чтобы добавить SSID и пароль WiFi, добавьте информацию о вашей сети в соответствии со спецификациями ESPHome:
 
 ```yaml
 wifi:
@@ -16,24 +136,24 @@ wifi:
   password: 123456123456
 ```
 
-# Modification
+# Модификация
 
-### Using local packages
+### Использование локальных пакетов
 
-By default, packages are referencing this GitHub repository, allowing you to do a new Install from ESPHome dashboard to get the latest modifications without downloading other files, but does require an Internet connection.  If you wish to have more control over modifications or only reference local files, copy the `packages` folder to your local ESPHome folder in a `packages` subfolder and replace `github://MallocArray/airgradient_esphome/packages `with `!include packages`
+По умолчанию пакеты ссылаются на этот репозиторий GitHub, что позволяет выполнить новую установку из панели управления ESPHome для получения последних изменений без загрузки других файлов, но требует подключения к Интернету. Если вы хотите иметь больше контроля над модификациями или ссылаться только на локальные файлы, скопируйте папку `packages` в вашу локальную папку ESPHome в подпапку `packages` и замените `github://MallocArray/airgradient_esphome/packages` на `!include packages`
 
 ```yaml
-# Example
+# Пример
 board: github://MallocArray/airgradient_esphome/packages/sensor_s8.yaml
-# becomes
+# становится
 board: !include packages/sensor_s8.yaml
 ```
 
-### Using Extend feature
+### Использование функции Extend
 
-Rather than download an individual package and update the reference to it, you may also use the [Extend](https://esphome.io/guides/configuration-types.html#extend) option to make minor modifications without editing the packages file.  This only works for items with and `id:` defined
+Вместо загрузки отдельного пакета и обновления ссылки на него, вы также можете использовать опцию [Extend](https://esphome.io/guides/configuration-types.html#extend) для внесения небольших изменений без редактирования файла пакета. Это работает только для элементов с определенным `id:`
 
-> Example: adding this to the main file for your device will change the pin number in the config_button package, while maintaining all other settings defined in the package
+> Пример: добавление этого в основной файл для вашего устройства изменит номер контакта в пакете config_button, сохраняя все остальные настройки, определенные в пакете
 
 ```
 binary_sensor:
@@ -42,36 +162,36 @@ binary_sensor:
       number: D7
 ```
 
-### Copy and Paste
+### Копирование и вставка
 
-It is also possible to copy the contents of a package file and paste it directly into your YAML file.  Do note that sections cannot be duplicated, so if multiple sections like `interval` are pasted in, they must be combined into a single entry when using this method.
+Также можно скопировать содержимое файла пакета и вставить его непосредственно в ваш YAML файл. Обратите внимание, что разделы не могут дублироваться, поэтому если несколько разделов, таких как `interval`, вставлены, они должны быть объединены в одну запись при использовании этого метода.
 
-### Adding other packages
+### Добавление других пакетов
 
-Several additional packages are available in the `packages` folder that can be added or removed as needed.  See the [Packages page](/packages.md) for more information about available options.
+В папке `packages` доступно несколько дополнительных пакетов, которые можно добавлять или удалять по мере необходимости. Подробнее о доступных опциях см. на [странице пакетов](/packages.md).
 
-### Additional Information
+### Дополнительная информация
 
-MQTT support has been mentioned in the AirGradient forums several times.  ESPHome supports this by adding a few lines to the main yaml file. Add the relevant information for your configuration. Read more about it here:
+Поддержка MQTT упоминалась на форумах AirGradient несколько раз. ESPHome поддерживает это, добавив несколько строк в основной yaml файл. Добавьте соответствующую информацию для вашей конфигурации. Подробнее здесь:
 [https://esphome.io/components/mqtt.html](https://esphome.io/components/mqtt.html)
 
-# Home Assistant Automation
+# Автоматизация Home Assistant
 
-Pairing ESPHome with Home Assistant opens a multitude of opportunities to create custom actions tailored to your liking
+Интеграция ESPHome с Home Assistant открывает множество возможностей для создания пользовательских действий по вашему вкусу
 
-## Disable Display and LED based on time
+## Отключение дисплея и светодиодов по времени
 
-1. In Home Assistant, navigate to Settings>Automations and scenes
-2. Click "Create Automation" button, then "Create new automation"
-   1. When
-      1. Add Trigger>Time>Mode>Fixed Time
-      2. Set to your desired time to turn off the display and/or LED
-   2. Then do
-      1. Add Action>Device>Select your AirGradient from the ESPHome Integration
-      2. In the Action field, select "Turn on `<Your AirGradient Name> Display Blank Page`"
-         1. For the base config with only the single page display package, this will set the display to show an empty page
-         2. If using the multi_page package, may need to add additional actions to turn off the other enabled pages
-      3. Repeat action for "Turn Off `<Your AirGradient Name> LED Strip`" (If applicable)
-   3. Click the Save button and give it a name, such as "AirGradient Night Mode"
-3. Repeat with a new Automation, with the actions reversed (Turn off Display Blank Page and turn on LED Strip), at the desired time with a name such as "AirGradient Night Mode Off"
-   ![automation](image/configuration/2025-03-20-205242.png)
+1. В Home Assistant перейдите в Настройки>Автоматизация и сцены
+2. Нажмите кнопку "Создать автоматизацию", затем "Создать новую автоматизацию"
+   1. Когда
+      1. Добавить Триггер>Время>Режим>Фиксированное время
+      2. Установите желаемое время для выключения дисплея и/или светодиодов
+   2. Затем
+      1. Добавить Действие>Устройство>Выберите ваш AirGradient из интеграции ESPHome
+      2. В поле Действие выберите "Включить `<Название вашего AirGradient> Пустая страница дисплея`"
+         1. Для базовой конфигурации с только пакетом одностраничного дисплея это установит дисплей для показа пустой страницы
+         2. Если используется пакет multi_page, может потребоваться добавить дополнительные действия для отключения других включенных страниц
+      3. Повторите действие для "Выключить `<Название вашего AirGradient> Светодиодная лента`" (если применимо)
+   3. Нажмите кнопку Сохранить и дайте ей имя, например "Ночной режим AirGradient"
+3. Повторите с новой автоматизацией, с обратными действиями (Выключить Пустую страницу дисплея и включить Светодиодную ленту), в желаемое время с именем, например "Выключение ночного режима AirGradient"
+   ![автоматизация](image/configuration/2025-03-20-205242.png)
