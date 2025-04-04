@@ -1,50 +1,50 @@
-# Packages
+# Пакеты
 
-This repository is primarily configured around Packages for ESPhome, which are single files that contain all of the related configurations for a particular feature.
+Этот репозиторий в основном настроен на использование пакетов для ESPhome, которые представляют собой отдельные файлы, содержащие все связанные конфигурации для определенной функции.
 
 ## airgradient_api_d1_mini_no_sgp41.yaml
 
-Uploads sensor data to the [AirGradient Dashboard](https://app.airgradient.com/dashboard). This file is for devices based on the D1 Mini chip (AG Basic and AG Pro) that does not include the SGP41 sensor for VOC/NOx
+Загружает данные датчиков на [Панель управления AirGradient](https://app.airgradient.com/dashboard). Этот файл предназначен для устройств на базе чипа D1 Mini (AG Basic и AG Pro), которые не включают датчик SGP41 для VOC/NOx
 
 ## airgradient_api_d1_mini.yaml
 
-Uploads sensor data to the [AirGradient Dashboard](https://app.airgradient.com/dashboard). This file is for devices based on the D1 Mini chip (AG Basic and AG Pro) with all current sensors, including SGP41
+Загружает данные датчиков на [Панель управления AirGradient](https://app.airgradient.com/dashboard). Этот файл предназначен для устройств на базе чипа D1 Mini (AG Basic и AG Pro) со всеми текущими датчиками, включая SGP41
 
-# airgradient_api_d1_mini_insecure.yaml
+## airgradient_api_d1_mini_insecure.yaml
 
-Uploads sensor data to the [AirGradient Dashboard](https://app.airgradient.com/dashboard) using http instead of https.  Some boards, such as the ESP8266 D1 Mini can sometimes go into a reboot loop when communicating over https.  Original firmware used http without issue, so offering this as an alternative for devices that require it.
+Загружает данные датчиков на [Панель управления AirGradient](https://app.airgradient.com/dashboard) с использованием http вместо https. Некоторые платы, такие как ESP8266 D1 Mini, иногда могут попасть в цикл перезагрузки при общении по https. Оригинальная прошивка использовала http без проблем, поэтому предлагается этот вариант для устройств, которые в нем нуждаются.
 
- This file is for devices based on the D1 Mini chip (AG Basic and AG Pro) with all current sensors, including SGP41
+Этот файл предназначен для устройств на базе чипа D1 Mini (AG Basic и AG Pro) со всеми текущими датчиками, включая SGP41
 
 ## airgradient_api_esp32-c3_dual_pms5003t.yaml
 
-Uploads sensor data to the [AirGradient Dashboard](https://app.airgradient.com/dashboard). This file is for devices based on the ESP32-C3 chip (AG ONE and OpenAir) with dual PMS5003t sensors.  Designed for the Outdoor OpenAir model O-PPT1
+Загружает данные датчиков на [Панель управления AirGradient](https://app.airgradient.com/dashboard). Этот файл предназначен для устройств на базе чипа ESP32-C3 (AG ONE и OpenAir) с двумя датчиками PMS5003t. Разработан для модели Outdoor OpenAir O-PPT1
 
 ## airgradient_api_esp32-c3.yaml
 
-Uploads sensor data to the [AirGradient Dashboard](https://app.airgradient.com/dashboard). This file is for devices based on the ESP32-C3 chip (AG ONE and OpenAir) with all current sensors for the indoor models
+Загружает данные датчиков на [Панель управления AirGradient](https://app.airgradient.com/dashboard). Этот файл предназначен для устройств на базе чипа ESP32-C3 (AG ONE и OpenAir) со всеми текущими датчиками для внутренних моделей
 
 ## airgradient_d1_mini_board.yaml
 
-Board configuration for devices based on the D1 Mini chip (AG Basic and AG Pro), now using the esp-idf framework which reduces some memory usage and allow for newer features to be enabled
+Конфигурация платы для устройств на базе чипа D1 Mini (AG Basic и AG Pro), теперь использующая фреймворк esp-idf, который уменьшает использование памяти и позволяет включить новые функции
 
 ## airgradient_esp32-c3_board_arduino.yaml
 
-Board configuration for devices based on the ESP32-C3 chip (AG ONE and OpenAir) using the original Arduino framework
+Конфигурация платы для устройств на базе чипа ESP32-C3 (AG ONE и OpenAir) с использованием оригинального фреймворка Arduino
 
 ## button_factory_reset.yaml
 
-Enables a button to reset device to factory resets, which erases all nvram and erases all stored preferences.
+Включает кнопку для сброса устройства к заводским настройкам, что стирает всю nvram и все сохраненные настройки.
 
-Useful if warning messages about being unable to save preferences appear
+Полезно, если появляются предупреждающие сообщения о невозможности сохранения настроек
 
 ## captive_portal.yaml
 
-Configures the device to provide a captive portal to create a hotspot if wifi is not connected, so it can be connected to a new wifi network without reconfiguring the config file
+Настраивает устройство для предоставления портала захвата для создания точки доступа, если wifi не подключен, чтобы его можно было подключить к новой сети wifi без переконфигурации файла конфигурации
 
 ## config_button.yaml
 
-Enables the configuration button on the AirGradient device.  Default configuration is for devices based on ESP32-C3 chip, but additional configuration can be added to change the pin to support D1 Mini if the device has a physical button installed (Already part of the config file for AG Pro v4.2)
+Включает кнопку конфигурации на устройстве AirGradient. Конфигурация по умолчанию предназначена для устройств на базе чипа ESP32-C3, но можно добавить дополнительную конфигурацию для изменения контакта для поддержки D1 Mini, если на устройстве установлена физическая кнопка (уже является частью конфигурационного файла для AG Pro v4.2)
 
 ```yaml
 binary_sensor:
@@ -53,47 +53,47 @@ binary_sensor:
       number: D7
 ```
 
-* Short press - Toggle temperature display between C and F
-* Press and hold up to 5 seconds - Initiate Senseair S8 CO2 manual calibration.  Ensure device is already outdoors or near an open window for 5+ minutes before initiating
+* Короткое нажатие - Переключение отображения температуры между C и F
+* Нажатие и удержание до 5 секунд - Инициирование ручной калибровки Senseair S8 CO2. Убедитесь, что устройство уже находится на улице или возле открытого окна в течение 5+ минут перед инициированием
 
 ## diagnostic_esp32.yaml
 
-Enables debug sensor information for the ESP32-C3 chip that is very verbose.
+Включает отладочную информацию датчиков для чипа ESP32-C3, которая очень подробна.
 
 ## diagnostic_esp8266.yaml
 
-Enables debug sensor information for the ESP8266 (D1 Mini) chip that is very verbose.
+Включает отладочную информацию датчиков для чипа ESP8266 (D1 Mini), которая очень подробна.
 
 ## display_sh1106_multi_page.yaml
 
-Display configuration for AG Pro and ONE.  Supports multiple pages that can be rotated through by enabling the switches in the Home Assistant interface
+Конфигурация дисплея для AG Pro и ONE. Поддерживает несколько страниц, которые можно переключать, включив переключатели в интерфейсе Home Assistant
 
-Contrast adjustment is available, which can dim the display considerably, but will not fully disable it
+Доступна регулировка контрастности, которая может значительно затемнить дисплей, но не отключит его полностью
 
-Consumes more RAM than the single page config.  If having trouble with devices, particular the D1 Mini, consider trying the single page configuration instead.
+Потребляет больше оперативной памяти, чем конфигурация с одной страницей. Если возникают проблемы с устройствами, особенно с D1 Mini, рассмотрите возможность использования конфигурации с одной страницей.
 
-* AirGradient default page
-* Summary pages with larger font
-* Air quality with only CO2 and PM2.5 values
-* Air temp and humidity
-* VOC and NOx values
-* Combo page with multiple sensor values
+* Страница по умолчанию AirGradient
+* Страницы сводки с большим шрифтом
+* Качество воздуха только со значениями CO2 и PM2.5
+* Температура и влажность воздуха
+* Значения VOC и NOx
+* Комбинированная страница с несколькими значениями датчиков
 
 ## display_sh1106_single_page.yaml
 
-Display configuration for AG Pro and ONE. Displays only a single page based on the default AirGradient look
+Конфигурация дисплея для AG Pro и ONE. Отображает только одну страницу на основе стандартного вида AirGradient
 
-Contrast adjustment is available, which can dim the display considerably, but will not fully disable it
+Доступна регулировка контрастности, которая может значительно затемнить дисплей, но не отключит его полностью
 
 ## display_ssd1306.yaml
 
-Display configuration for AG Basic
+Конфигурация дисплея для AG Basic
 
 ## led_co2.yaml
 
-LED bar in AG ONE reflecting multiple sensor values.
+Светодиодная полоса в AG ONE, отражающая значения нескольких датчиков.
 
-Mixes colors from green>yellow>orange>red>purple based on numbers provided by AirGradient.  The values for each color can be modified by adding a substitution section to your config.
+Смешивает цвета от зеленого>желтого>оранжевого>красного>фиолетового на основе чисел, предоставленных AirGradient. Значения для каждого цвета можно изменить, добавив раздел подстановок в вашу конфигурацию.
 
 ```yaml
 substitutions:
@@ -105,9 +105,9 @@ substitutions:
 
 ## led_combo.yaml
 
-LED bar in AG ONE reflecting multiple sensor values. Left 5 LEDs reflect CO2 levels, middle 5 LEDs reflect PM2.5 levels, far right indicates TVOC. (Same as display)
+Светодиодная полоса в AG ONE, отражающая значения нескольких датчиков. Левые 5 светодиодов отражают уровни CO2, средние 5 светодиодов отражают уровни PM2.5, крайний правый указывает на TVOC. (То же, что и дисплей)
 
-Mixes colors from green>yellow>orange>red>purple based on numbers provided by AirGradient. The values for each color can be modified by adding a substitution section to your config.
+Смешивает цвета от зеленого>желтого>оранжевого>красного>фиолетового на основе чисел, предоставленных AirGradient. Значения для каждого цвета можно изменить, добавив раздел подстановок в вашу конфигурацию.
 
 ```yaml
 substitutions:
@@ -130,9 +130,9 @@ substitutions:
 
 ## led_pm25.yaml
 
-LED bar in AG ONE reflects PM2.5 levels.
+Светодиодная полоса в AG ONE отражает уровни PM2.5.
 
-Mixes colors from green>yellow>orange>red>purple based on numbers provided by AirGradient. The values for each color can be modified by adding a substitution section to your config.
+Смешивает цвета от зеленого>желтого>оранжевого>красного>фиолетового на основе чисел, предоставленных AirGradient. Значения для каждого цвета можно изменить, добавив раздел подстановок в вашу конфигурацию.
 
 ```yaml
 substitutions:
@@ -144,9 +144,9 @@ substitutions:
 
 ## led_tvoc.yaml
 
-LED bar in AG ONE reflects VOC levels.
+Светодиодная полоса в AG ONE отражает уровни VOC.
 
-Mixes colors from blue>green>purple based on numbers provided by AirGradient. The values for each color can be modified by adding a substitution section to your config.
+Смешивает цвета от синего>зеленого>фиолетового на основе чисел, предоставленных AirGradient. Значения для каждого цвета можно изменить, добавив раздел подстановок в вашу конфигурацию.
 
 ```yaml
 substitutions:
@@ -159,94 +159,94 @@ substitutions:
 
 ## led.yaml
 
-Configures the 11 segment LED bar in AG ONE models.
+Настраивает 11-сегментную светодиодную полосу в моделях AG ONE.
 
-Also enables On/Off toggle, brightness, and LED fade out
+Также включает переключатель Вкл/Выкл, яркость и затухание светодиодов
 
 ## sensor_nowcast_aqi.yaml
 
-Configures sensors for AQI and NowCast values and Category directly on the device.
+Настраивает датчики для значений AQI и NowCast и категории непосредственно на устройстве.
 
-Submitted by GitHub user @Ex-Nerd
+Предоставлено пользователем GitHub @Ex-Nerd
 
 ## sensor_bme680.yaml
 
-Configures sensors from BME 680 chip to supply temperature, humidity, pressure, IAQ, CO2 equivalent, and Breath VOC.
+Настраивает датчики из чипа BME 680 для предоставления температуры, влажности, давления, IAQ, эквивалента CO2 и дыхательного VOC.
 
-Has not been a reliable source of CO2 or VOC.
+Не является надежным источником CO2 или VOC.
 
 ## sensor_pms5003_extended_life.yaml
 
-Configures the Plantower PMS5003 sensor.
+Настраивает датчик Plantower PMS5003.
 
-By default collects readings every second. Since this device has a limited lifespan, it is possible to extend the life by collecting readings less frequently.  Could introduce a new failure mode as the fan shuts down, allowing insects to get inside past the fan that is no longer spinning after 30 seconds.
+По умолчанию собирает показания каждую секунду. Поскольку это устройство имеет ограниченный срок службы, можно продлить его жизнь, собирая показания реже. Может привести к новому режиму отказа, так как вентилятор выключается, позволяя насекомым проникнуть внутрь мимо вентилятора, который больше не вращается после 30 секунд.
 
-Collects readings every 2 minutes by default, but can be modified by adding an entry under substitutions, ensuring the value is surrounded by double quotes
+Собирает показания каждые 2 минуты по умолчанию, но можно изменить, добавив запись в разделе подстановок, убедившись, что значение окружено двойными кавычками
 `pm_update_interval: "2min"`
 
 ## sensor_pms5003t_2_extended_life.yaml
 
-Configures a second Plantower PMS5003T sensor when 2 are installed, such as the Open Air Model O-1PPT.  Reports PM2.5, Temperature, and Humidity.
+Настраивает второй датчик Plantower PMS5003T, когда установлено 2, например, в модели Open Air O-1PPT. Отчитывается о PM2.5, температуре и влажности.
 
-Also applies a compensation algorithm from AirGradient to correct temperature and humidity readings when used inside of the Open Air enclosure
+Также применяет алгоритм компенсации от AirGradient для коррекции показаний температуры и влажности при использовании внутри корпуса Open Air
 
-In addition to enabling sensors from the second device, also creates sensors that report the average of the 2 devices.
+В дополнение к включению датчиков со второго устройства, также создает датчики, которые сообщают среднее значение двух устройств.
 
-By default collects readings every second. Since this device has a limited lifespan, it is possible to extend the life by collecting readings less frequently.  Could introduce a new failure mode as the fan shuts down, allowing insects to get inside past the fan that is no longer spinning after 30 seconds.
+По умолчанию собирает показания каждую секунду. Поскольку это устройство имеет ограниченный срок службы, можно продлить его жизнь, собирая показания реже. Может привести к новому режиму отказа, так как вентилятор выключается, позволяя насекомым проникнуть внутрь мимо вентилятора, который больше не вращается после 30 секунд.
 
-Collects readings every 2 minutes by default, but can be modified by adding an entry under substitutions, ensuring the value is surrounded by double quotes
+Собирает показания каждые 2 минуты по умолчанию, но можно изменить, добавив запись в разделе подстановок, убедившись, что значение окружено двойными кавычками
 `pm_update_interval: "2min"`
 
 ## sensor_pms5003t_2.yaml
 
-Configures a second Plantower PMS5003T sensor when 2 are installed, such as the Open Air Model O-1PPT.  Reports PM 2.5, Temperature, and Humidity.
+Настраивает второй датчик Plantower PMS5003T, когда установлено 2, например, в модели Open Air O-1PPT. Отчитывается о PM 2.5, температуре и влажности.
 
-Also applies a compensation algorithm from AirGradient to correct temperature and humidity readings when used inside of the Open Air enclosure
+Также применяет алгоритм компенсации от AirGradient для коррекции показаний температуры и влажности при использовании внутри корпуса Open Air
 
-In addition to enabling sensors from the second device, also creates sensors that report the average of the 2 devices.
+В дополнение к включению датчиков со второго устройства, также создает датчики, которые сообщают среднее значение двух устройств.
 
 ## sensor_pms5003t_extended_life.yaml
 
-Configures a Plantower PMS5003T sensor.  Reports PM 2.5, Temperature, and Humidity.
+Настраивает датчик Plantower PMS5003T. Отчитывается о PM 2.5, температуре и влажности.
 
-Also applies a compensation algorithm from AirGradient to correct temperature and humidity readings when used inside of the Open Air enclosure
+Также применяет алгоритм компенсации от AirGradient для коррекции показаний температуры и влажности при использовании внутри корпуса Open Air
 
-By default collects readings every second. Since this device has a limited lifespan, it is possible to extend the life by collecting readings less frequently.  Could introduce a new failure mode as the fan shuts down, allowing insects to get inside past the fan that is no longer spinning after 30 seconds.
+По умолчанию собирает показания каждую секунду. Поскольку это устройство имеет ограниченный срок службы, можно продлить его жизнь, собирая показания реже. Может привести к новому режиму отказа, так как вентилятор выключается, позволяя насекомым проникнуть внутрь мимо вентилятора, который больше не вращается после 30 секунд.
 
-Collects readings every 2 minutes by default, but can be modified by adding an entry under substitutions, ensuring the value is surrounded by double quotes
+Собирает показания каждые 2 минуты по умолчанию, но можно изменить, добавив запись в разделе подстановок, убедившись, что значение окружено двойными кавычками
 `pm_update_interval: "2min"`
 
 ## sensor_pms5003t_uncorrected.yaml
 
-Configures a Plantower PMS5003T sensor.  Reports PM 2.5, Temperature, and Humidity.
+Настраивает датчик Plantower PMS5003T. Отчитывается о PM 2.5, температуре и влажности.
 
-Does not apply a compensation algorithm to provide values directly from the sensor
+Не применяет алгоритм компенсации для предоставления значений непосредственно с датчика
 
 ## sensor_pms5003t.yaml
 
-Configures a Plantower PMS5003T sensor.  Reports PM 2.5, Temperature, and Humidity.
+Настраивает датчик Plantower PMS5003T. Отчитывается о PM 2.5, температуре и влажности.
 
-Also applies a compensation algorithm from AirGradient to correct temperature and humidity readings when used inside of the Open Air enclosure
+Также применяет алгоритм компенсации от AirGradient для коррекции показаний температуры и влажности при использовании внутри корпуса Open Air
 
 ## sensor_pms5003_uncorrected.yaml
 
-Configures a Plantower PMS5003 sensor using raw values from the sensor
+Настраивает датчик Plantower PMS5003, используя необработанные значения с датчика
 
-Reports PM 2.5, PM 10, PM 1.0, PM 0.3, and Air Quality Index based on the current readings.
+Отчитывается о PM 2.5, PM 10, PM 1.0, PM 0.3 и индексе качества воздуха на основе текущих показаний.
 
 ## sensor_pms5003.yaml
 
-Configures a Plantower PMS5003 sensor.
+Настраивает датчик Plantower PMS5003.
 
-Applies correction algorithms provided by AirGradient
+Применяет алгоритмы коррекции, предоставленные AirGradient
 
 https://www.airgradient.com/documentation/correction-algorithms/
 
-Reports PM 2.5, PM 10, PM 1.0, PM 0.3, and Air Quality Index based on the current readings.
+Отчитывается о PM 2.5, PM 10, PM 1.0, PM 0.3 и индексе качества воздуха на основе текущих показаний.
 
 ## sensor_s8.yaml
 
-Configures a Senseair S8 sensor.
+Настраивает датчик Senseair S8.
 
 Reports CO2 levels and enables buttons to initiate a manual baseline correction, show the correction interval, and disable/enable Automatic Baseline Correction feature
 
