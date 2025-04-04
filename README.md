@@ -1,6 +1,59 @@
-# AirGradient ESPHome Configurations
+# Конфигурации AirGradient ESPHome
 
-ESPHome yaml files for AirGradient devices to maintain the research and accuracy of AirGradient sensors, while also gaining the benefits of ESPHome/HomeAssistant for easy to use switches, buttons, configurations, and dashboards.  Maintains the ability to also send data to the AirGradient Dashboard, which can also be disabled/removed to keep all data local.
+Этот репозиторий содержит конфигурации ESPHome для устройств AirGradient. Поддерживаются следующие устройства:
+
+- AirGradient ONE
+- AirGradient PRO
+- AirGradient BASIC
+- AirGradient Open Air
+
+## Установка
+
+Смотрите [installation.md](installation.md) для подробных инструкций по установке.
+
+## Конфигурация
+
+Смотрите [configuration.md](configuration.md) для подробной информации о конфигурации.
+
+## Критические изменения
+
+### 2024-05-13
+
+- Добавлена поддержка для устройств Open Air с несколькими датчиками PMS5003T
+- Добавлена поддержка для следующих комбинаций датчиков:
+  - PMS5003
+  - PMS5003 + SGP41
+  - PMS5003 + SHT31
+  - PMS5003 + BME680
+  - PMS5003 + SGP41 + SHT31
+  - PMS5003 + SGP41 + BME680
+  - PMS5003 + SHT31 + BME680
+  - PMS5003 + SGP41 + SHT31 + BME680
+
+## Поддерживаемые датчики
+
+### Температура и влажность
+- SHT31
+- SHT4X
+- BME680
+
+### Качество воздуха
+- PMS5003
+- PMS5003T
+- SGP41
+
+### CO2
+- Senseair S8
+- SCD30
+- SCD4X
+
+### Другие
+- BME680 (давление)
+- SGP41 (NOx)
+
+## Лицензия
+
+Этот проект распространяется под лицензией MIT. Смотрите файл [LICENSE](LICENSE.txt) для подробностей.
 
 <img src="image/README/1715467068556.png" width=25% height=25%>
 
