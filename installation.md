@@ -1,23 +1,23 @@
-# Installation
+# Установка
 
-## Standard
+## Стандартная установка
 
-* In ESPHome web interface, click New Device.  Give any name. Select any model of board, and click Skip on the final page to not install at this time. Click Edit on the new entry and replace with the contents of the .yaml file for your model.
-* Alternatively, copy the .yaml file from the main folder for your model in this repo and place it in the `config` folder of your ESPHome.
-* Make any desired changes to the substitutions to name the devices for your use case
-* Install to the device using one of the ESPHome options.
+* В веб-интерфейсе ESPHome нажмите "Новое устройство". Дайте любое имя. Выберите любую модель платы и нажмите "Пропустить" на последней странице, чтобы не устанавливать сейчас. Нажмите "Редактировать" на новой записи и замените содержимое файлом .yaml для вашей модели.
+* Или скопируйте файл .yaml из основной папки для вашей модели в этом репозитории и поместите его в папку `config` вашего ESPHome.
+* Внесите желаемые изменения в подстановки, чтобы назвать устройства для вашего случая использования
+* Установите на устройство, используя один из вариантов ESPHome.
 
-> Note: by default ESPHome only syncs remote repositories that the packages are referencing once per day, so if changes are made to the repository, you may not get the updated config for up to 1 day after it is published.  You can remove the contents of the folder config/.esphome/packages to force it to update sooner
+> Примечание: по умолчанию ESPHome синхронизирует удаленные репозитории, на которые ссылаются пакеты, только один раз в день, поэтому если в репозитории внесены изменения, вы можете не получить обновленную конфигурацию до 1 дня после публикации. Вы можете удалить содержимое папки config/.esphome/packages, чтобы принудительно обновить раньше
 
-> Note: setting `add_mac_suffix: "true"` allows for multiple devices on your network at the same time and report as unique entries even if your `name:` field is duplicated, but it can cause ESPHome to not detect devices as Online after installing, since ESPHome is looking for only the `name:` field and the actual device name has the MAC address added to the end
+> Примечание: установка `add_mac_suffix: "true"` позволяет иметь несколько устройств в вашей сети одновременно и отображать их как уникальные записи, даже если ваше поле `name:` дублируется, но это может привести к тому, что ESPHome не будет определять устройства как "В сети" после установки, поскольку ESPHome ищет только поле `name:`, а фактическое имя устройства имеет MAC-адрес, добавленный в конец
 
-> One way to resolve this is to change `add_mac_suffix: "false"` so the device name will match exactly.  If you have multiple devices, make sure to change the `name: `field to be unique for each device
+> Один из способов решить эту проблему - изменить `add_mac_suffix: "false"`, чтобы имя устройства точно совпадало. Если у вас несколько устройств, убедитесь, что поле `name:` уникально для каждого устройства
 
-> Another alternative is to add a static IP to the wifi configuration and configure ESPHome to ping the device by IP instead of hostname
+> Другой вариант - добавить статический IP в конфигурацию wifi и настроить ESPHome для пинга устройства по IP вместо имени хоста
 
 > [Dashboard status light not working across subnets/zones · Issue #641 · esphome/issues (github.com)](https://github.com/esphome/issues/issues/641#issuecomment-534156628)
 
- Example for static IP
+Пример для статического IP
 
 ```yaml
 wifi:
@@ -30,21 +30,21 @@ wifi:
     dns1: 192.168.1.1
 ```
 
-## ESPHome Web install
+## Установка через веб-интерфейс ESPHome
 
-Install a compiled file to your device all with just a browser and USB cable, no ESPHome install required.
+Установите скомпилированный файл на ваше устройство с помощью только браузера и USB-кабеля, установка ESPHome не требуется.
 
-Save the appropriate .bin file and go to [https://web.esphome.io/](https://web.esphome.io/) in your browser to connect your ESP device and send the .bin file to it
+Сохраните соответствующий файл .bin и перейдите по адресу [https://web.esphome.io/](https://web.esphome.io/) в вашем браузере, чтобы подключить ваше устройство ESP и отправить файл .bin на него
 
-In some cases, the device may encounter errors using the web flash tool.  Steps to put the device in a special boot flash mode can be found here:
+В некоторых случаях устройство может столкнуться с ошибками при использовании веб-инструмента прошивки. Шаги для перевода устройства в специальный режим загрузки прошивки можно найти здесь:
 [https://forum.airgradient.com/t/airgradient-one-not-working-after-flashing-with-arduino/1326/4 ](https://forum.airgradient.com/t/airgradient-one-not-working-after-flashing-with-arduino/1326/4)
 
-## Full YAML file
+## Полный YAML файл
 
-The `full_config` folder contains a single yaml file per model that contains the full standalone configuration, created by the `esphome config` command.  This adds in all of the optional parameters, so is much longer than the minimum configuration, but the single file contains all needed information to be completely independent from this repo.
+Папка `full_config` содержит один yaml файл для каждой модели, который содержит полную автономную конфигурацию, созданную командой `esphome config`. Это добавляет все дополнительные параметры, поэтому файл намного длиннее минимальной конфигурации, но один файл содержит всю необходимую информацию для полной независимости от этого репозитория.
 
-Copy the full config file to your personal ESPhome config file and customize as desired, then install to your device.
+Скопируйте полный конфигурационный файл в ваш личный файл конфигурации ESPhome и настройте по желанию, затем установите на ваше устройство.
 
-## Troubleshooting
+## Устранение неполадок
 
-If some sensors are not showing valid readings after installing or upgrading, please remove the power cable from the device entirely for 5-10 seconds, then reconnect.  Many issues are resolved with a full power reset, as the software reset does not fully clear some situations.
+Если некоторые датчики не показывают правильные показания после установки или обновления, пожалуйста, полностью отключите кабель питания от устройства на 5-10 секунд, затем снова подключите. Многие проблемы решаются полным сбросом питания, так как программный сброс не полностью очищает некоторые ситуации.
